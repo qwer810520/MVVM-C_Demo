@@ -9,9 +9,22 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
+    private(set) var appCoordinator: AppCoordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        appCoordinator = AppCoordinator(viewController: TodoTabbarController())
+        appCoordinator?.start()
+        
+        if #available(iOS 13, *) {
+            
+        } else {
+            window = UIWindow(frame: UIScreen.main.bounds)
+            window?.rootViewController = appCoordinator?.rootViewController
+            window?.makeKeyAndVisible()
+        }
+        
         return true
     }
 

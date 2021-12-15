@@ -18,6 +18,9 @@
 		391E9A252769A9360064BA2A /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A242769A9360064BA2A /* CoordinatorType.swift */; };
 		391E9A272769A9EC0064BA2A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A262769A9EC0064BA2A /* Coordinator.swift */; };
 		391E9A2B2769C86B0064BA2A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 391E9A2A2769C86B0064BA2A /* SnapKit */; };
+		391E9A432769D2B10064BA2A /* TodoTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A422769D2B10064BA2A /* TodoTabbarController.swift */; };
+		391E9A462769D3010064BA2A /* TodoTabbarDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A452769D3010064BA2A /* TodoTabbarDelegateProxy.swift */; };
+		391E9A482769D33B0064BA2A /* RootTabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A472769D33B0064BA2A /* RootTabbarCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,9 @@
 		391E9A222769A9190064BA2A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		391E9A242769A9360064BA2A /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		391E9A262769A9EC0064BA2A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		391E9A422769D2B10064BA2A /* TodoTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTabbarController.swift; sourceTree = "<group>"; };
+		391E9A452769D3010064BA2A /* TodoTabbarDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTabbarDelegateProxy.swift; sourceTree = "<group>"; };
+		391E9A472769D33B0064BA2A /* RootTabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabbarCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,7 @@
 		391E99F02769A68B0064BA2A /* MVVM-CDemo */ = {
 			isa = PBXGroup;
 			children = (
+				391E9A3F2769D2890064BA2A /* ViewControllers */,
 				391E9A212769A8940064BA2A /* Coordinator */,
 				391E99F12769A68B0064BA2A /* AppDelegate.swift */,
 				391E99F32769A68B0064BA2A /* SceneDelegate.swift */,
@@ -134,10 +141,44 @@
 			isa = PBXGroup;
 			children = (
 				391E9A222769A9190064BA2A /* AppCoordinator.swift */,
+				391E9A472769D33B0064BA2A /* RootTabbarCoordinator.swift */,
 				391E9A242769A9360064BA2A /* CoordinatorType.swift */,
 				391E9A262769A9EC0064BA2A /* Coordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		391E9A3F2769D2890064BA2A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				391E9A412769D29E0064BA2A /* Navigation */,
+				391E9A402769D2980064BA2A /* Tabbar */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		391E9A402769D2980064BA2A /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				391E9A442769D2E10064BA2A /* DelegateProxy */,
+				391E9A422769D2B10064BA2A /* TodoTabbarController.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		391E9A412769D29E0064BA2A /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		391E9A442769D2E10064BA2A /* DelegateProxy */ = {
+			isa = PBXGroup;
+			children = (
+				391E9A452769D3010064BA2A /* TodoTabbarDelegateProxy.swift */,
+			);
+			path = DelegateProxy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,7 +319,10 @@
 			files = (
 				391E9A232769A9190064BA2A /* AppCoordinator.swift in Sources */,
 				391E99F22769A68B0064BA2A /* AppDelegate.swift in Sources */,
+				391E9A482769D33B0064BA2A /* RootTabbarCoordinator.swift in Sources */,
 				391E9A272769A9EC0064BA2A /* Coordinator.swift in Sources */,
+				391E9A462769D3010064BA2A /* TodoTabbarDelegateProxy.swift in Sources */,
+				391E9A432769D2B10064BA2A /* TodoTabbarController.swift in Sources */,
 				391E9A252769A9360064BA2A /* CoordinatorType.swift in Sources */,
 				391E99F42769A68B0064BA2A /* SceneDelegate.swift in Sources */,
 			);
