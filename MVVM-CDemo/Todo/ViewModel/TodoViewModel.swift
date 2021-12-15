@@ -13,8 +13,8 @@ protocol TodoViewModelInput {
 
 protocol TodoViewModelOutput {
     var refreshDataTrigger: Observable<Void> { get }
-    var numberOfItem: Int { get }
-    func findTodoNote(withIndex index: Int) -> TodoNote?
+    var todoNoteCount: Int { get }
+    func findTodoNote(withIndex index: Int) -> TodoNote
 }
 
 protocol TodoViewModelType {
@@ -23,7 +23,7 @@ protocol TodoViewModelType {
 }
 
 class TodoViewModel: TodoViewModelType {
-    private var todoNoteList: [TodoNote] = [] {
+    private var todoNoteList: [TodoNote] = [TodoNote(title: "Demo1", content: "Test Test")] {
         didSet {
             refreshDataTrigger.value = ()
         }
@@ -46,11 +46,11 @@ extension TodoViewModel: TodoViewModelInput {
     // MARK: - TodoViewModelOutput
 
 extension TodoViewModel: TodoViewModelOutput {
-    func findTodoNote(withIndex index: Int) -> TodoNote? {
+    func findTodoNote(withIndex index: Int) -> TodoNote {
         return todoNoteList[index]
     }
     
-    var numberOfItem: Int {
+    var todoNoteCount: Int {
         return todoNoteList.count
     }
 }

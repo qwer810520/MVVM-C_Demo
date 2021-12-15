@@ -17,7 +17,7 @@ class TodoNoteInfoCoordinator: Coordinator<UINavigationController> {
     }
     
     override func start() {
-        let controller = TodoNoteInfoViewController()
+        let controller = TodoNoteInfoViewController(info: noteInfo)
         controller.hidesBottomBarWhenPushed = true
         push(viewController: controller)
         super.start()

@@ -36,7 +36,8 @@
 		391E9A7A2769EE0D0064BA2A /* TodoNoteInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A792769EE0D0064BA2A /* TodoNoteInfoViewController.swift */; };
 		391E9A7C276A01B10064BA2A /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A7B276A01B10064BA2A /* Observable.swift */; };
 		391E9A7E276A03280064BA2A /* AddTodoNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A7D276A03280064BA2A /* AddTodoNoteViewModel.swift */; };
-		391E9A80276A07BE0064BA2A /* AddTodoNoteViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A7F276A07BE0064BA2A /* AddTodoNoteViewView.swift */; };
+		391E9A80276A07BE0064BA2A /* AddTodoNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A7F276A07BE0064BA2A /* AddTodoNoteView.swift */; };
+		39A5C120276A38040029F57B /* TodoNoteInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A5C11F276A38040029F57B /* TodoNoteInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,7 +90,8 @@
 		391E9A792769EE0D0064BA2A /* TodoNoteInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNoteInfoViewController.swift; sourceTree = "<group>"; };
 		391E9A7B276A01B10064BA2A /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		391E9A7D276A03280064BA2A /* AddTodoNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoNoteViewModel.swift; sourceTree = "<group>"; };
-		391E9A7F276A07BE0064BA2A /* AddTodoNoteViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoNoteViewView.swift; sourceTree = "<group>"; };
+		391E9A7F276A07BE0064BA2A /* AddTodoNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoNoteView.swift; sourceTree = "<group>"; };
+		39A5C11F276A38040029F57B /* TodoNoteInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNoteInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,7 +329,7 @@
 		391E9A6C2769E72A0064BA2A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				391E9A7F276A07BE0064BA2A /* AddTodoNoteViewView.swift */,
+				391E9A7F276A07BE0064BA2A /* AddTodoNoteView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -362,6 +364,7 @@
 		391E9A752769ED6B0064BA2A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				39A5C11F276A38040029F57B /* TodoNoteInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				391E9A502769D8F00064BA2A /* TodoCoordinator.swift in Sources */,
 				391E9A7A2769EE0D0064BA2A /* TodoNoteInfoViewController.swift in Sources */,
 				391E9A4B2769D6CE0064BA2A /* TodoNavigationController.swift in Sources */,
+				39A5C120276A38040029F57B /* TodoNoteInfoView.swift in Sources */,
 				391E9A602769E56E0064BA2A /* AddTodoNoteCoordinator.swift in Sources */,
 				391E9A712769E8070064BA2A /* AddTodoNoteViewController.swift in Sources */,
 				391E9A522769DBE70064BA2A /* TodoViewController.swift in Sources */,
@@ -524,7 +528,7 @@
 				391E9A7E276A03280064BA2A /* AddTodoNoteViewModel.swift in Sources */,
 				391E9A272769A9EC0064BA2A /* Coordinator.swift in Sources */,
 				391E9A462769D3010064BA2A /* TodoTabbarDelegateProxy.swift in Sources */,
-				391E9A80276A07BE0064BA2A /* AddTodoNoteViewView.swift in Sources */,
+				391E9A80276A07BE0064BA2A /* AddTodoNoteView.swift in Sources */,
 				391E9A432769D2B10064BA2A /* TodoTabbarController.swift in Sources */,
 				391E9A252769A9360064BA2A /* CoordinatorType.swift in Sources */,
 				391E9A5D2769E1AF0064BA2A /* UIView+Ex.swift in Sources */,

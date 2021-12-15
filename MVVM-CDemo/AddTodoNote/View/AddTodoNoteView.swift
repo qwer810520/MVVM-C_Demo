@@ -38,6 +38,7 @@ class AddTodoNoteView: UIView {
         view.layer.cornerRadius = 5
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.25).cgColor
+        view.font = .systemFont(ofSize: 18)
         return view
     }()
     
