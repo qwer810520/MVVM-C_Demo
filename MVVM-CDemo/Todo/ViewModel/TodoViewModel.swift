@@ -32,7 +32,7 @@ class TodoViewModel: TodoViewModelType {
     var input: TodoViewModelInput { self }
     var output: TodoViewModelOutput { self }
     
-    private(set) var refreshDataTrigger = Observable(())
+    private(set) var refreshDataTrigger: Observable<Void> = Observable()
 }
 
     // MARK: - TodoViewModelInput
@@ -51,6 +51,6 @@ extension TodoViewModel: TodoViewModelOutput {
     }
     
     var numberOfItem: Int {
-        todoNoteList.count
+        return todoNoteList.count
     }
 }

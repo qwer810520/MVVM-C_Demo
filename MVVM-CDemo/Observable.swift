@@ -10,10 +10,15 @@ import Foundation
 class Observable<T> {
     private var listener: ((T) -> Void)?
     
-    var value: T {
+    var value: T? {
         didSet {
+            guard let value = value else { return }
             listener?(value)
         }
+    }
+    
+    init() {
+        self.value = nil
     }
     
     init(_ value: T) {
@@ -21,7 +26,9 @@ class Observable<T> {
     }
     
     func bind(_ closure: @escaping (T) -> Void) {
-        closure(value)
+        if let value = value {
+            closure(value)
+        }
         listener = closure
     }
 }

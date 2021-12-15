@@ -10,9 +10,15 @@ import SnapKit
 
 class TodoTitleCell: UICollectionViewCell {
     
-    private lazy var titleLabel: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
         return label
+    }()
+    
+    private var bottomIntervalLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.25)
+        return view
     }()
     
     var titleText: String? {
@@ -34,7 +40,7 @@ class TodoTitleCell: UICollectionViewCell {
     // MARK: - Private Methods
     
     private func setupUserInterface() {
-        contentView.addSubview(titleLabel)
+        contentView.addSubviews([titleLabel, bottomIntervalLine])
         setupAutolayout()
     }
     
@@ -43,6 +49,13 @@ class TodoTitleCell: UICollectionViewCell {
             $0.top.bottom.equalToSuperview()
             $0.left.equalToSuperview().offset(30)
             $0.right.lessThanOrEqualTo(200)
+        }
+        
+        bottomIntervalLine.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(30)
+            $0.right.equalToSuperview().offset(-30)
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(1)
         }
     }
 }

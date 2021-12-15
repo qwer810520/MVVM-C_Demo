@@ -9,7 +9,17 @@ import UIKit
 
 struct TodoNote {
     var title: String
-    var detail: String
+    var content: String
+    
+    init() {
+        self.title = ""
+        self.content = ""
+    }
+    
+    init(title: String, content: String) {
+        self.title = title
+        self.content = content
+    }
 }
 
 protocol TodoViewControllerDelegate: AnyObject {
@@ -47,6 +57,10 @@ class TodoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUserInterface()
+    }
+    
+    func setupNewTodoNote(_ note: TodoNote) {
+        viewModel.input.setupNewTodoNote(withNote: note)
     }
     
     // MARK: - Private Methods
@@ -91,7 +105,7 @@ extension TodoViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let note = TodoNote(title: "", detail: "")
+        let note = TodoNote()
         delegate?.todoViewController(self, didTapAction: .oldNote(note))
     }
 }

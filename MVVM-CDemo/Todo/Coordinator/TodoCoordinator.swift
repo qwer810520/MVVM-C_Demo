@@ -24,7 +24,7 @@ class TodoCoordinator: Coordinator<UINavigationController> {
     }
 }
 
-    //MARK: - TodoViewControllerDelegate
+    // MARK: - TodoViewControllerDelegate
 
 extension TodoCoordinator: TodoViewControllerDelegate {
     func todoViewController(_ viewController: TodoViewController, didTapAction action: TodoViewController.Actions) {
@@ -44,6 +44,6 @@ extension TodoCoordinator: TodoViewControllerDelegate {
 
 extension TodoCoordinator: AddTodoNoteCoordinatorDelegate {
     func addTodoNoteDidFinishEdit(_ coordinator: AddTodoNoteCoordinator, withNewNote note: TodoNote) {
-        
+        todoViewController.setupNewTodoNote(note)
     }
 }
