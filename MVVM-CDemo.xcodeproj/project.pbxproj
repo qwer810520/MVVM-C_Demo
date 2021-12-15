@@ -21,6 +21,9 @@
 		391E9A432769D2B10064BA2A /* TodoTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A422769D2B10064BA2A /* TodoTabbarController.swift */; };
 		391E9A462769D3010064BA2A /* TodoTabbarDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A452769D3010064BA2A /* TodoTabbarDelegateProxy.swift */; };
 		391E9A482769D33B0064BA2A /* RootTabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A472769D33B0064BA2A /* RootTabbarCoordinator.swift */; };
+		391E9A4B2769D6CE0064BA2A /* TodoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A4A2769D6CE0064BA2A /* TodoNavigationController.swift */; };
+		391E9A4E2769D7810064BA2A /* TodoNavigationDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A4D2769D7810064BA2A /* TodoNavigationDelegateProxy.swift */; };
+		391E9A502769D8F00064BA2A /* TodoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E9A4F2769D8F00064BA2A /* TodoCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,9 @@
 		391E9A422769D2B10064BA2A /* TodoTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTabbarController.swift; sourceTree = "<group>"; };
 		391E9A452769D3010064BA2A /* TodoTabbarDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTabbarDelegateProxy.swift; sourceTree = "<group>"; };
 		391E9A472769D33B0064BA2A /* RootTabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabbarCoordinator.swift; sourceTree = "<group>"; };
+		391E9A4A2769D6CE0064BA2A /* TodoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNavigationController.swift; sourceTree = "<group>"; };
+		391E9A4D2769D7810064BA2A /* TodoNavigationDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNavigationDelegateProxy.swift; sourceTree = "<group>"; };
+		391E9A4F2769D8F00064BA2A /* TodoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +150,7 @@
 				391E9A472769D33B0064BA2A /* RootTabbarCoordinator.swift */,
 				391E9A242769A9360064BA2A /* CoordinatorType.swift */,
 				391E9A262769A9EC0064BA2A /* Coordinator.swift */,
+				391E9A4F2769D8F00064BA2A /* TodoCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -169,6 +176,8 @@
 		391E9A412769D29E0064BA2A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				391E9A4C2769D76F0064BA2A /* DelegateProxy */,
+				391E9A4A2769D6CE0064BA2A /* TodoNavigationController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -177,6 +186,14 @@
 			isa = PBXGroup;
 			children = (
 				391E9A452769D3010064BA2A /* TodoTabbarDelegateProxy.swift */,
+			);
+			path = DelegateProxy;
+			sourceTree = "<group>";
+		};
+		391E9A4C2769D76F0064BA2A /* DelegateProxy */ = {
+			isa = PBXGroup;
+			children = (
+				391E9A4D2769D7810064BA2A /* TodoNavigationDelegateProxy.swift */,
 			);
 			path = DelegateProxy;
 			sourceTree = "<group>";
@@ -319,12 +336,15 @@
 			files = (
 				391E9A232769A9190064BA2A /* AppCoordinator.swift in Sources */,
 				391E99F22769A68B0064BA2A /* AppDelegate.swift in Sources */,
+				391E9A502769D8F00064BA2A /* TodoCoordinator.swift in Sources */,
+				391E9A4B2769D6CE0064BA2A /* TodoNavigationController.swift in Sources */,
 				391E9A482769D33B0064BA2A /* RootTabbarCoordinator.swift in Sources */,
 				391E9A272769A9EC0064BA2A /* Coordinator.swift in Sources */,
 				391E9A462769D3010064BA2A /* TodoTabbarDelegateProxy.swift in Sources */,
 				391E9A432769D2B10064BA2A /* TodoTabbarController.swift in Sources */,
 				391E9A252769A9360064BA2A /* CoordinatorType.swift in Sources */,
 				391E99F42769A68B0064BA2A /* SceneDelegate.swift in Sources */,
+				391E9A4E2769D7810064BA2A /* TodoNavigationDelegateProxy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
