@@ -7,19 +7,50 @@
 
 import UIKit
 
-//protocol TodoViewModelInput {
-//
-//}
-//
-//protocol TodoViewModelOutput {
-//
-//}
-//
-//class TodoViewModel: ViewModelType {
-//    var input: TodoViewModelInput
-//    var output: TodoViewModelOutput
-//
-//    init() {
-//
-//    }
-//}
+protocol TodoViewModelInput {
+    func setupNewTodoNote(withNote note: TodoNote)
+}
+
+protocol TodoViewModelOutput {
+    var refreshDataTrigger: Observable<Void> { get }
+    var numberOfItem: Int { get }
+    func findTodoNote(withIndex index: Int) -> TodoNote?
+}
+
+protocol TodoViewModelType {
+    var input: TodoViewModelInput { get }
+    var output: TodoViewModelOutput { get }
+}
+
+class TodoViewModel: TodoViewModelType {
+    private var todoNoteList: [TodoNote] = [] {
+        didSet {
+            refreshDataTrigger.value = ()
+        }
+    }
+    
+    var input: TodoViewModelInput { self }
+    var output: TodoViewModelOutput { self }
+    
+    private(set) var refreshDataTrigger = Observable(())
+}
+
+    // MARK: - TodoViewModelInput
+
+extension TodoViewModel: TodoViewModelInput {
+    func setupNewTodoNote(withNote note: TodoNote) {
+        todoNoteList.append(note)
+    }
+}
+
+    // MARK: - TodoViewModelOutput
+
+extension TodoViewModel: TodoViewModelOutput {
+    func findTodoNote(withIndex index: Int) -> TodoNote? {
+        return todoNoteList[index]
+    }
+    
+    var numberOfItem: Int {
+        todoNoteList.count
+    }
+}

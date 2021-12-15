@@ -31,15 +31,21 @@ class TodoViewController: UIViewController {
     }
     
     weak var delegate: TodoViewControllerDelegate?
+    private let viewModel: TodoViewModelType
+    
+    init(viewModel: TodoViewModelType) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setupUserInterface()
     }
     
@@ -51,11 +57,18 @@ class TodoViewController: UIViewController {
         view.addSubview(todoCollectionView)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemDidPressed))
         setupAutolayout()
+        setupBinding()
     }
     
     private func setupAutolayout() {
         todoCollectionView.snp.makeConstraints {
             $0.top.left.right.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setupBinding() {
+        viewModel.output.refreshDataTrigger.bind { [weak self] _ in
+            self?.todoCollectionView.reloadData()
         }
     }
     
@@ -70,11 +83,11 @@ class TodoViewController: UIViewController {
 
 extension TodoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: collectionView.frame.width, height: 50)
+        return .init(width: collectionView.frame.width, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        0
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -87,12 +100,13 @@ extension TodoViewController: UICollectionViewDelegateFlowLayout {
 
 extension TodoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        return viewModel.output.numberOfItem
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: TodoTitleCell.self, for: indexPath)
-        cell.titleText = "indexPath: \(indexPath.item)"
+        let item = viewModel.output.findTodoNote(withIndex: indexPath.item)
+        cell.titleText = item?.title
         return cell
     }
 }

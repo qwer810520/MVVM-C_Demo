@@ -8,10 +8,18 @@
 import UIKit
 
 class TodoCoordinator: Coordinator<UINavigationController> {
+    
+    private let todoViewController: TodoViewController
+    
+    override init(viewController: UINavigationController) {
+        let viewModel = TodoViewModel()
+        self.todoViewController = TodoViewController(viewModel: viewModel)
+        super.init(viewController: viewController)
+    }
+    
     override func start() {
-        let controller = TodoViewController()
-        controller.delegate = self
-        push(viewController: controller)
+        todoViewController.delegate = self
+        push(viewController: todoViewController)
         super.start()
     }
 }
