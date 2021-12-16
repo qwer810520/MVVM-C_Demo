@@ -10,9 +10,7 @@ import SnapKit
 
 class TodoNoteInfoViewController: UIViewController {
     
-    private var showTodoInfoView: TodoNoteInfoView = {
-       return TodoNoteInfoView()
-    }()
+    private var showTodoInfoView = TodoNoteInfoView()
     
     private var noteInfo: TodoNote
     
@@ -48,9 +46,9 @@ class TodoNoteInfoViewController: UIViewController {
     }
     
     private func setupAutolayout() {
-        showTodoInfoView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.left.right.bottom.equalToSuperview()
+        showTodoInfoView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.right.bottom.equalToSuperview()
         }
     }
 }

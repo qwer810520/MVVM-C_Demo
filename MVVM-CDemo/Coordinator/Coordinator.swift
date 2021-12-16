@@ -10,12 +10,12 @@ import UIKit.UINavigationController
 
 class Coordinator<T: UIViewController>: CoordinatorType {
     
-    var childCoordinator: [CoordinatorType]
-    var parent: CoordinatorType?
-    let rootViewController: T
-    
     private(set) var isStart = false
     private(set) var isActive = false
+    
+    let rootViewController: T
+    var childCoordinator: [CoordinatorType]
+    var parent: CoordinatorType?
     
     init(viewController: T) {
         self.rootViewController = viewController

@@ -16,6 +16,7 @@ class AddTodoNoteCoordinator: Coordinator<UINavigationController> {
     weak var delegate: AddTodoNoteCoordinatorDelegate?
     
     override func start() {
+        guard !isStart else { return }
         let viewModel = AddTodoNoteViewModel()
         let controller = AddTodoNoteViewController(viewModel: viewModel)
         controller.delegate = self

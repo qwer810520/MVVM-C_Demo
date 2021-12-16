@@ -10,16 +10,6 @@ import UIKit
 struct TodoNote {
     var title: String
     var content: String
-    
-    init() {
-        self.title = ""
-        self.content = ""
-    }
-    
-    init(title: String, content: String) {
-        self.title = title
-        self.content = content
-    }
 }
 
 protocol TodoViewControllerDelegate: AnyObject {
@@ -28,20 +18,13 @@ protocol TodoViewControllerDelegate: AnyObject {
 
 class TodoViewController: UIViewController {
     
-    private lazy var todoCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(with: [TodoTitleCell.self])
-        return collectionView
-    }()
-    
     enum Actions {
         case add, oldNote(TodoNote)
     }
     
-    weak var delegate: TodoViewControllerDelegate?
     private let viewModel: TodoViewModelType
+    private lazy var todoCollectionView = createCollectionView()
+    weak var delegate: TodoViewControllerDelegate?
     
     init(viewModel: TodoViewModelType) {
         self.viewModel = viewModel
@@ -74,9 +57,18 @@ class TodoViewController: UIViewController {
         setupBinding()
     }
     
+    private func createCollectionView() -> UICollectionView {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(with: [TodoTitleCell.self])
+        return collectionView
+    }
+    
+    
     private func setupAutolayout() {
         todoCollectionView.snp.makeConstraints {
-            $0.top.left.right.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
     

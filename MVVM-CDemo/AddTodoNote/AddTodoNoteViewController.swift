@@ -14,18 +14,13 @@ protocol AddTodoNoteViewControllerDelegate: AnyObject {
 
 class AddTodoNoteViewController: UIViewController {
     
-    private lazy var editNewNoteView: AddTodoNoteView = {
-        let view = AddTodoNoteView()
-        view.delegate = self
-        return view
-    }()
-    
     enum Actions {
         case cancel, finish(TodoNote)
     }
     
-    weak var delegate: AddTodoNoteViewControllerDelegate?
     private let viewModel: AddTodoNoteViewModelType
+    private var editNewNoteView = AddTodoNoteView()
+    weak var delegate: AddTodoNoteViewControllerDelegate?
     
     // MARK: - UIViewController
     
@@ -64,7 +59,12 @@ class AddTodoNoteViewController: UIViewController {
     private func setupUserInterface() {
         view.backgroundColor = .black.withAlphaComponent(0.25)
         view.addSubview(editNewNoteView)
+        setupSubviews()
         setupAutolayout()
+    }
+
+    private func setupSubviews() {
+        editNewNoteView.delegate = self
     }
     
     private func setupAutolayout() {
@@ -117,7 +117,6 @@ class AddTodoNoteViewController: UIViewController {
     private func keyboardWillHide() {
         editNewNoteView.snp.updateConstraints {
             $0.centerY.equalToSuperview()
-            $0.height.equalTo(400)
         }
     }
 }

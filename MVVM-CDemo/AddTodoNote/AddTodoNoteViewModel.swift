@@ -21,7 +21,6 @@ protocol AddTodoNoteViewModelType {
 }
 
 class AddTodoNoteViewModel: AddTodoNoteViewModelType, AddTodoNoteViewModelOutput {
-
     enum Error: LocalizedError {
         case titleIsEmpty
     }

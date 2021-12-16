@@ -9,17 +9,19 @@ import UIKit
 
 class TodoCoordinator: Coordinator<UINavigationController> {
     
-    private let todoViewController: TodoViewController
+    private var todoViewModel: TodoViewModel?
     
     override init(viewController: UINavigationController) {
-        let viewModel = TodoViewModel()
-        self.todoViewController = TodoViewController(viewModel: viewModel)
         super.init(viewController: viewController)
     }
     
     override func start() {
-        todoViewController.delegate = self
-        push(viewController: todoViewController)
+        guard !isStart else { return }
+        let viewModel = TodoViewModel()
+        todoViewModel = viewModel
+        let viewController = TodoViewController(viewModel: viewModel)
+        viewController.delegate = self
+        push(viewController: viewController)
         super.start()
     }
 }
@@ -44,6 +46,6 @@ extension TodoCoordinator: TodoViewControllerDelegate {
 
 extension TodoCoordinator: AddTodoNoteCoordinatorDelegate {
     func addTodoNoteDidFinishEdit(_ coordinator: AddTodoNoteCoordinator, withNewNote note: TodoNote) {
-        todoViewController.setupNewTodoNote(note)
+        todoViewModel?.input.setupNewTodoNote(withNote: note)
     }
 }

@@ -23,16 +23,16 @@ protocol TodoViewModelType {
 }
 
 class TodoViewModel: TodoViewModelType {
+    
+    let refreshDataTrigger: Observable<Void> = Observable()
+    var input: TodoViewModelInput { self }
+    var output: TodoViewModelOutput { self }
+    
     private var todoNoteList: [TodoNote] = [TodoNote(title: "Demo1", content: "Test Test")] {
         didSet {
             refreshDataTrigger.value = ()
         }
     }
-    
-    var input: TodoViewModelInput { self }
-    var output: TodoViewModelOutput { self }
-    
-    private(set) var refreshDataTrigger: Observable<Void> = Observable()
 }
 
     // MARK: - TodoViewModelInput

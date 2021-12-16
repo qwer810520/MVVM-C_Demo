@@ -10,16 +10,8 @@ import SnapKit
 
 class TodoTitleCell: UICollectionViewCell {
     
-    private var titleLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
-    
-    private var bottomIntervalLine: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.25)
-        return view
-    }()
+    private var titleLabel = UILabel ()
+    private var bottomIntervalLine = UIView()
     
     var titleText: String? {
         get { titleLabel.text }
@@ -41,21 +33,26 @@ class TodoTitleCell: UICollectionViewCell {
     
     private func setupUserInterface() {
         contentView.addSubviews([titleLabel, bottomIntervalLine])
+        setupSubViews()
         setupAutolayout()
     }
     
+    private func setupSubViews() {
+        bottomIntervalLine.backgroundColor = UIColor.lightGray.withAlphaComponent(0.25)
+    }
+    
     private func setupAutolayout() {
-        titleLabel.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.left.equalToSuperview().offset(30)
-            $0.right.lessThanOrEqualTo(200)
+        titleLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(30)
+            make.right.lessThanOrEqualTo(200)
         }
         
-        bottomIntervalLine.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(30)
-            $0.right.equalToSuperview().offset(-30)
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(1)
+        bottomIntervalLine.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(30)
+            make.right.equalToSuperview().offset(-30)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
     }
 }
