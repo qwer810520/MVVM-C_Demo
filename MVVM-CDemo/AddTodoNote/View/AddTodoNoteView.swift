@@ -124,12 +124,14 @@ class AddTodoNoteView: UIView {
     
     // MARK: - Action Methods
     
-    @objc private func saveButtonDidPressed() {
+    @objc
+    private func saveButtonDidPressed() {
         guard let title = titleInputTextField.text, let content = contentInputView.text else { return }
         delegate?.saveButtonDidPressed(with: (title, content))
     }
     
-    @objc private func cancelButtonDidPressed() {
+    @objc
+    private func cancelButtonDidPressed() {
         delegate?.cancelButtonDidPressed()
     }
 }

@@ -88,7 +88,8 @@ class TodoViewController: UIViewController {
     
     // MARK: - Action Methods
     
-    @objc private func addItemDidPressed() {
+    @objc
+    private func addItemDidPressed() {
         delegate?.todoViewController(self, didTapAction: .add)
     }
 }

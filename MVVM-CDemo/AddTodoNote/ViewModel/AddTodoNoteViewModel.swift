@@ -32,7 +32,7 @@ class AddTodoNoteViewModel: AddTodoNoteViewModelType, AddTodoNoteViewModelOutput
     private(set) var finishTrigger: Observable<Result<TodoNote, Error>> = Observable()
 }
 
-    // 
+    // MARK: - AddTodoNoteViewModelInput
 
 extension AddTodoNoteViewModel: AddTodoNoteViewModelInput {
     func createNewTodoNote(with title: String, andContent content: String) {

@@ -42,10 +42,21 @@ class AddTodoNoteViewController: UIViewController {
         super.viewDidLoad()
         setupUserInterface()
         setupBinding()
+        observerKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeNotificationObserver()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     
     // MARK: - Privare Methods
@@ -60,7 +71,7 @@ class AddTodoNoteViewController: UIViewController {
         editNewNoteView.snp.makeConstraints {
             $0.centerY.centerX.equalToSuperview()
             $0.width.equalTo(UIScreen.main.bounds.width - 100)
-            $0.height.equalTo(500)
+            $0.height.equalTo(400)
         }
     }
     
@@ -72,6 +83,41 @@ class AddTodoNoteViewController: UIViewController {
             case let .failure(error):
                 self?.showAlert(with: error.errorDescription ?? "")
             }
+        }
+    }
+    
+    private func observerKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIApplication.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIApplication.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeNotificationObserver() {
+        NotificationCenter.default.removeObserver(self, name: UIApplication.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.keyboardWillHideNotification, object: nil)
+    }
+    
+    // MARK: - Action Methods
+    
+    @objc
+    private func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIApplication.keyboardFrameEndUserInfoKey] as? CGRect, let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
+        let editViewFrame = editNewNoteView.frame
+        
+        guard keyboardFrame.minY - 20 < editViewFrame.maxY else { return }
+        let space = (keyboardFrame.minY - editViewFrame.maxY) - 30
+      
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0, options: [], animations: { [weak self] in
+            self?.editNewNoteView.snp.updateConstraints {
+                $0.centerY.equalToSuperview().offset(space)
+            }
+        })
+    }
+    
+    @objc
+    private func keyboardWillHide() {
+        editNewNoteView.snp.updateConstraints {
+            $0.centerY.equalToSuperview()
+            $0.height.equalTo(400)
         }
     }
 }
