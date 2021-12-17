@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 struct TodoNote {
     var title: String
@@ -23,6 +24,7 @@ class TodoViewController: UIViewController {
     }
     
     private let viewModel: TodoViewModelType
+    private var subscriptions: Set<AnyCancellable> = []
     private lazy var todoCollectionView = createCollectionView()
     weak var delegate: TodoViewControllerDelegate?
     
@@ -73,9 +75,14 @@ class TodoViewController: UIViewController {
     }
     
     private func setupBinding() {
-        viewModel.output.refreshDataTrigger.bind { [weak self] _ in
-            self?.todoCollectionView.reloadData()
-        }
+        viewModel.output.refreshDataTrigger
+            .sink { [weak self] res in
+                switch res {
+                case .reloadData:
+                    self?.todoCollectionView.reloadData()
+                }
+            }
+            .store(in: &subscriptions)
     }
     
     // MARK: - Action Methods

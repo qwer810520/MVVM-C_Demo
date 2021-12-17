@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 protocol AddTodoNoteViewControllerDelegate: AnyObject {
     func addTodoNoteViewController(_ viewController: AddTodoNoteViewController, editAction action: AddTodoNoteViewController.Actions)
@@ -19,6 +20,7 @@ class AddTodoNoteViewController: UIViewController {
     }
     
     private let viewModel: AddTodoNoteViewModelType
+    private var subscriptions: Set<AnyCancellable> = []
     private var editNewNoteView = AddTodoNoteView()
     weak var delegate: AddTodoNoteViewControllerDelegate?
     
@@ -76,14 +78,17 @@ class AddTodoNoteViewController: UIViewController {
     }
     
     private func setupBinding() {
-        viewModel.output.finishTrigger.bind { [weak self] res in
-            switch res {
-            case let .success(newNote):
-                self?.delegate?.addTodoNoteViewController(self!, editAction: .finish(newNote))
-            case let .failure(error):
-                self?.showAlert(with: error.errorDescription ?? "")
+        viewModel.output.finishTriggerPublisher
+            .sink { [weak self] res in
+                guard let self = self else { return }
+                switch res {
+                case let .finish(newNote):
+                    self.delegate?.addTodoNoteViewController(self, editAction: .finish(newNote))
+                case let .editFail(error):
+                    self.showAlert(with: error.errorDescription ?? "")
+                }
             }
-        }
+            .store(in: &subscriptions)
     }
     
     private func observerKeyboard() {

@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 protocol TodoViewModelInput {
     func setupNewTodoNote(withNote note: TodoNote)
 }
 
 protocol TodoViewModelOutput {
-    var refreshDataTrigger: Observable<Void> { get }
+    var refreshDataTrigger: AnyPublisher<TodoViewModel.ViewState, Never> { get }
     var todoNoteCount: Int { get }
     func findTodoNote(withIndex index: Int) -> TodoNote
 }
@@ -24,14 +25,19 @@ protocol TodoViewModelType {
 
 class TodoViewModel: TodoViewModelType {
     
-    let refreshDataTrigger: Observable<Void> = Observable()
+    enum ViewState {
+        case reloadData
+    }
+    
+    private let refreshDataTriggerSubjecy = CurrentValueSubject<ViewState, Never>(.reloadData)
+    let refreshDataTrigger: AnyPublisher<ViewState, Never>
     var input: TodoViewModelInput { self }
     var output: TodoViewModelOutput { self }
     
-    private var todoNoteList: [TodoNote] = [TodoNote(title: "Demo1", content: "Test Test")] {
-        didSet {
-            refreshDataTrigger.value = ()
-        }
+    private var todoNoteList: [TodoNote] = [TodoNote(title: "Demo1", content: "Test Test")]
+    
+    init() {
+        refreshDataTrigger = refreshDataTriggerSubjecy.eraseToAnyPublisher()
     }
 }
 
@@ -40,6 +46,7 @@ class TodoViewModel: TodoViewModelType {
 extension TodoViewModel: TodoViewModelInput {
     func setupNewTodoNote(withNote note: TodoNote) {
         todoNoteList.append(note)
+        refreshDataTriggerSubjecy.send(.reloadData)
     }
 }
 

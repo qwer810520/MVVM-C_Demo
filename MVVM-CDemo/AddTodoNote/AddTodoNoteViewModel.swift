@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import Combine
 
 protocol AddTodoNoteViewModelInput {
     func createNewTodoNote(with title: String, andContent content: String)
 }
 
 protocol AddTodoNoteViewModelOutput {
-    var finishTrigger: Observable<Result<TodoNote, AddTodoNoteViewModel.Error>> { get }
+    var finishTriggerPublisher: AnyPublisher<AddTodoNoteViewModel.ViewState, Never> { get }
 }
 
 protocol AddTodoNoteViewModelType {
@@ -25,10 +26,19 @@ class AddTodoNoteViewModel: AddTodoNoteViewModelType, AddTodoNoteViewModelOutput
         case titleIsEmpty
     }
     
+    enum ViewState {
+        case finish(TodoNote), editFail(Error)
+    }
+    
+    private var triggerSubject = PassthroughSubject<ViewState, Never>()
+    private var subscriptions: Set<AnyCancellable> = []
+    let finishTriggerPublisher: AnyPublisher<ViewState, Never>
     var input: AddTodoNoteViewModelInput { self }
     var output: AddTodoNoteViewModelOutput { self }
     
-    private(set) var finishTrigger: Observable<Result<TodoNote, Error>> = Observable()
+    init() {
+        finishTriggerPublisher = triggerSubject.eraseToAnyPublisher()
+    }
 }
 
     // MARK: - AddTodoNoteViewModelInput
@@ -36,11 +46,11 @@ class AddTodoNoteViewModel: AddTodoNoteViewModelType, AddTodoNoteViewModelOutput
 extension AddTodoNoteViewModel: AddTodoNoteViewModelInput {
     func createNewTodoNote(with title: String, andContent content: String) {
         guard !title.isEmpty else {
-            output.finishTrigger.value = .failure(.titleIsEmpty)
+            triggerSubject.send(.editFail(.titleIsEmpty))
             return
         }
         let newNode = TodoNote(title: title, content: content)
-        output.finishTrigger.value = .success(newNode)
+        triggerSubject.send(.finish(newNode))
     }
 }
 
